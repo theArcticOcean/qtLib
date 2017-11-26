@@ -51,9 +51,16 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = main.cpp \
-		testthread.cpp 
+		testthread.cpp \
+		testthread2.cpp \
+		thread2control.cpp moc_testthread2.cpp \
+		moc_thread2control.cpp
 OBJECTS       = main.o \
-		testthread.o
+		testthread.o \
+		testthread2.o \
+		thread2control.o \
+		moc_testthread2.o \
+		moc_thread2control.o
 DIST          = ../../../Qt5.9.2/5.9.2/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.9.2/5.9.2/clang_64/mkspecs/qdevice.pri \
 		../../../Qt5.9.2/5.9.2/clang_64/mkspecs/features/device_config.prf \
@@ -219,8 +226,12 @@ DIST          = ../../../Qt5.9.2/5.9.2/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.9.2/5.9.2/clang_64/mkspecs/features/exceptions.prf \
 		../../../Qt5.9.2/5.9.2/clang_64/mkspecs/features/yacc.prf \
 		../../../Qt5.9.2/5.9.2/clang_64/mkspecs/features/lex.prf \
-		QThread.pro testthread.h main.cpp \
-		testthread.cpp
+		QThread.pro testthread.h \
+		testthread2.h \
+		thread2control.h main.cpp \
+		testthread.cpp \
+		testthread2.cpp \
+		thread2control.cpp
 QMAKE_TARGET  = QThread
 DESTDIR       = 
 TARGET        = QThread
@@ -587,12 +598,12 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt5.9.2/5.9.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents testthread.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp testthread.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents testthread.h testthread2.h thread2control.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp testthread.cpp testthread2.cpp thread2control.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
-	-$(DEL_FILE) $(OBJECTS)
+	-$(DEL_FILE) $(OBJECTS) $(TARGET)
 	-$(DEL_FILE) *~ core *.core
 
 
@@ -620,8 +631,25 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../Qt5.9.2/5.9.2/clang_64/mkspecs/features/data/dummy.cpp
 	/Library/Developer/CommandLineTools/usr/bin/clang++ -pipe -stdlib=libc++ -O2 -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.13.sdk -mmacosx-version-min=10.10 -Wall -W -dM -E -o moc_predefs.h ../../../Qt5.9.2/5.9.2/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all:
+compiler_moc_header_make_all: moc_testthread2.cpp moc_thread2control.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) moc_testthread2.cpp moc_thread2control.cpp
+moc_testthread2.cpp: ../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		testthread2.h \
+		moc_predefs.h \
+		../../../Qt5.9.2/5.9.2/clang_64/bin/moc
+	/Users/weiyang/Qt5.9.2/5.9.2/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/weiyang/Qt5.9.2/5.9.2/clang_64/mkspecs/macx-clang -I/Users/weiyang/code/qtLib/QThread -I/Users/weiyang/Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/9.0.0/include -I/Library/Developer/CommandLineTools/usr/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX10.13.sdk/usr/include -F/Users/weiyang/Qt5.9.2/5.9.2/clang_64/lib testthread2.h -o moc_testthread2.cpp
+
+moc_thread2control.cpp: ../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		QThread \
+		testthread2.h \
+		thread2control.h \
+		moc_predefs.h \
+		../../../Qt5.9.2/5.9.2/clang_64/bin/moc
+	/Users/weiyang/Qt5.9.2/5.9.2/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/weiyang/Qt5.9.2/5.9.2/clang_64/mkspecs/macx-clang -I/Users/weiyang/code/qtLib/QThread -I/Users/weiyang/Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers -I/Library/Developer/CommandLineTools/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/9.0.0/include -I/Library/Developer/CommandLineTools/usr/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX10.13.sdk/usr/include -F/Users/weiyang/Qt5.9.2/5.9.2/clang_64/lib thread2control.h -o moc_thread2control.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
 compiler_rez_source_make_all:
@@ -632,7 +660,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean 
+compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -641,7 +669,11 @@ main.o: main.cpp ../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/QC
 		testthread.h \
 		QThread \
 		../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/qdebug.h
+		../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		thread2control.h \
+		../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		testthread2.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 testthread.o: testthread.cpp testthread.h \
@@ -649,6 +681,26 @@ testthread.o: testthread.cpp testthread.h \
 		../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o testthread.o testthread.cpp
+
+testthread2.o: testthread2.cpp testthread2.h \
+		../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o testthread2.o testthread2.cpp
+
+thread2control.o: thread2control.cpp thread2control.h \
+		../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		QThread \
+		testthread2.h \
+		../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt5.9.2/5.9.2/clang_64/lib/QtCore.framework/Headers/qdebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o thread2control.o thread2control.cpp
+
+moc_testthread2.o: moc_testthread2.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_testthread2.o moc_testthread2.cpp
+
+moc_thread2control.o: moc_thread2control.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_thread2control.o moc_thread2control.cpp
 
 ####### Install
 

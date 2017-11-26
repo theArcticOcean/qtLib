@@ -1,5 +1,6 @@
 #ifndef TESTTHREAD_H
 #define TESTTHREAD_H
+
 #include <QThread>
 #include <QDebug>
 

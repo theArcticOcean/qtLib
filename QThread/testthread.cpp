@@ -1,12 +1,17 @@
 #include "testthread.h"
 #include <unistd.h>
+#include <QThread>
+#include <pthread.h>
 
 void testThread::run()
 {
     int i;
     for(i=0; i<10; i++){
         usleep(200000);  //0.2 sec
-        qDebug()<<i+1;
+        qDebug()<<"pid: "<<getpid()
+               <<", tid: "<<pthread_self()
+               <<", handle: "<<QThread::currentThreadId()
+               <<", a: "<<i+1;
     }
 }
 
