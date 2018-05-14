@@ -1,16 +1,42 @@
 import QtQuick 2.6
 import QtQuick.Window 2.2
 import Union.Lotto.MyClass 1.0
-
+ 
 Window{
     visible: true
-    width: 640
-    height: 480
+    width: 100
+    height: 200
+
+    Rectangle {
+        id: iRec1
+        anchors.top: parent.top
+        color: "red";
+        width: parent.width;
+        height: 50
+    }
+
+    Rectangle {
+        id: iRec2
+        anchors.top: iRec1.bottom;
+        color: "green";
+        width: parent.width;
+        height: 50
+    }
+
+    Rectangle {
+        id: iRec3
+        anchors.top: iRec2.bottom;
+        color: "blue";
+        width: parent.width;
+        height: 50
+    }
 
     ListView{
-        anchors.fill: parent
+        id: iListView
+
+        anchors.top: iRec3.bottom
         width: parent.width
-        height: parent.height
+        height: 50
         visible: true
 
 //        model: {
@@ -55,5 +81,10 @@ Window{
 
     MyClass{
         id: myClass
+    }
+
+    function getfilterData(id)
+    {
+
     }
 }

@@ -15,6 +15,8 @@ public:
     virtual int columnCount(const QModelIndex &parent) const;
     Q_INVOKABLE virtual QVariant row(const int index) const = 0;
     Q_INVOKABLE virtual QVariantList allData() const = 0;
+    Q_INVOKABLE virtual QVariantList allDataFiltered(int id) const = 0;
+
 signals:
     void rowCountChanged(int count);
 

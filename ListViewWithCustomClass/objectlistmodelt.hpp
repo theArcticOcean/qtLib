@@ -5,6 +5,7 @@
 #include <QModelIndex>
 #include "objectlistmodelbase.h"
 #include <QDebug>
+#include "mysortfilterproxymodel.h"
 
 template<typename T>
 class ObjectListModelT : public ObjectListModelBase
@@ -87,6 +88,14 @@ public:
         }
 
         return varList;
+    }
+
+    Q_INVOKABLE QVariantList allDataFiltered(int id) const
+    {
+        MySortFilterProxyModel* proxyModel = new MySortFilterProxyModel();
+        proxyModel->setFilterId(id);
+        proxyModel->setSourceModel( static_cast<QAbstractItemModel*>( allData() ) );
+        return proxyModel->allData();
     }
 
     void setIsPointerFlag( bool tag )
