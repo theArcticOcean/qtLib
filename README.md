@@ -5,3 +5,4 @@ This folder stores some qt libraries and simple examples.
 <li>cppClassInListView: it is a simple example that add custom class in ListView. This example use qmlRegisterType().
 <li>cppPropertyInQml: cpp class define property which is used in qml file. 
 <li>cppSingletonInQml: a simple qmlRegisterSingletonType using example.
+<li>singletonQml: singleton qml type using example.
