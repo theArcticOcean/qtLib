@@ -6,3 +6,4 @@ This folder stores some qt libraries and simple examples.
 <li>cppPropertyInQml: cpp class define property which is used in qml file. 
 <li>cppSingletonInQml: a simple qmlRegisterSingletonType using example.
 <li>singletonQml: singleton qml type using example.
+<li>multiThreadVisitClass: an example shows the scene multiple thread visit one class.
