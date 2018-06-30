@@ -9,3 +9,4 @@ This folder stores some qt libraries and simple examples.
 <li>multiThreadVisitClass: an example shows the scene multiple thread visit one class.
 <li>DbusTest: QtDbus using example, it contains signal emitting and methods calling between processes.
 <li>DynamicPlugin: simple dynamic plugin example, dynamic library file provides message function, wherever user clicks GUI button executable file will call it.
+<li>StaticPlugin: simple static plugin example, static library file provides message function, wherever user clicks GUI button executable file will call it.
