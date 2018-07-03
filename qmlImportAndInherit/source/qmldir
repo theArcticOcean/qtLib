@@ -1,0 +1,4 @@
+module source.core
+
+myItem			1.0		myItem.qml
+intList			1.0		intList.qml
