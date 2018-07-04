@@ -1,5 +1,6 @@
 <RCC>
-	<qresource prefix="/">
-		<file>test.qml</file>
-	</qresource>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>source/MyRectangle.qml</file>
+    </qresource>
 </RCC>

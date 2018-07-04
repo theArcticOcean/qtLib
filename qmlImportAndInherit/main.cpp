@@ -1,21 +1,16 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QDebug>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    int result;
-    result =
-            qmlRegisterType(QUrl(QStringLiteral("qrc:/source/intList.qml")), "Source.Core", 1, 0, "myItem");
-    qDebug() << result;
-
-    result =
-            qmlRegisterType(QUrl(QStringLiteral("qrc:/source/intList.qml")), "Source.Core", 1, 0, "intList");
-    qDebug() << result;
 
     QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:/test.qml")));
-    //engine.load(QUrl(QStringLiteral("qrc:/source/myItem.qml")));
+    qmlRegisterType(QUrl("qrc:/source/MyRectangle.qml"), "Source.Core", 1, 0, "MyRectangle");
+
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    if (engine.rootObjects().isEmpty())
+        return -1;
+
     return app.exec();
 }

@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/source">
-        <file>qmldir</file>
-        <file>intList.qml</file>
-        <file>myItem.qml</file>
-    </qresource>
-</RCC>

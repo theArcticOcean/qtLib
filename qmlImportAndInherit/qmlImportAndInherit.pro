@@ -1,7 +1,6 @@
-TEMPLATE = app
-QT += qml quick
+QT += quick
 CONFIG += c++11
-RESOURCES += source/qml_source.qrc qml.qrc
 
-SOURCES += \
-    main.cpp
+SOURCES += main.cpp
+
+RESOURCES += qml.qrc
