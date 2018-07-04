@@ -1,6 +1,6 @@
-import QtQuick 2.7
+import QtQuick.Window 2.2
 
-Item {
+Window  {
 	visible: true
 	width: 640
 	height: 480
