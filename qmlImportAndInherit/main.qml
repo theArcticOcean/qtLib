@@ -8,15 +8,23 @@ Window {
     width: 640
     height: 480
     title: qsTr("Hello World")
+
     property int count: 0
 
-    MyRectangle {
+    MyRectangle             //The first character of QML type name must be uppercase.
+    {
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
         mouseArea.onClicked: {
             console.log("We click it");
-            ++count;
-            rectTextArea.text = "We click it " + count + " times.";
+            rectTextArea.text = "We click rect " + (++count) + " times.";
         }
+    }
+
+    Ball
+    {
+        anchors.right: parent.right
+        anchors.top: parent.top
+        border.color: "black"
     }
 }

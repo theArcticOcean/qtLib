@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>source/MyRectangle.qml</file>
+        <file>source/Ball.qml</file>
+        <file>source/ball.png</file>
     </qresource>
 </RCC>
