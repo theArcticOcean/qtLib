@@ -26,8 +26,6 @@ signals:
 public slots:
 
 private:
-//    QPoint getLeftTopPoint();
-//    QPoint getRightBottomPoint();
     double getWidth();
     double getHeight();
     double getLeftTopX();

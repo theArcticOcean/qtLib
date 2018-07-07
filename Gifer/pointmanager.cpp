@@ -1,4 +1,5 @@
 #include "pointmanager.h"
+#include <math.h>
 
 PointManager::PointManager
     (
@@ -10,16 +11,6 @@ PointManager::PointManager
 {
 
 }
-
-//QPoint PointManager::getLeftTopPoint()
-//{
-//    return leftTop;
-//}
-
-//QPoint PointManager::getRightBottomPoint()
-//{
-//    return rightBottom;
-//}
 
 void PointManager::setLeftTopPoint(double x, double y)
 {
@@ -39,12 +30,12 @@ void PointManager::setRightBottomPoint(double x, double y)
 
 double PointManager::getWidth()
 {
-    return abs( rightBottom.x() - leftTop.x() );
+    return fabs( rightBottom.x() - leftTop.x() );
 }
 
 double PointManager::getHeight()
 {
-    return abs( rightBottom.y() - leftTop.y() );
+    return fabs( rightBottom.y() - leftTop.y() );
 }
 
 double PointManager::getLeftTopX()

@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     qmlRegisterSingletonType<PointManager>( "Share.core", 1, 0, "PointManager", singletontype_provider );
+
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
