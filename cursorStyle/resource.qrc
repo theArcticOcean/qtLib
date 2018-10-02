@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>handle.png</file>
+        <file>pen.png</file>
+        <file>array.png</file>
+    </qresource>
+</RCC>
