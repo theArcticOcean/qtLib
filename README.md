@@ -14,3 +14,4 @@ This folder stores some qt libraries and simple examples.
 <li>cursorStyle: an example that set cursor in Qt application.
 <li>qReadWriteLocker: an example that use QReadWriteLocker.
 <li>FatherWidget: an example that show child widget on father widget.
+<li>TextDialog: an example that use QDialogButtonBox and qRegisterMetaType
