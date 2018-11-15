@@ -13,3 +13,4 @@ This folder stores some qt libraries and simple examples.
 <li>cppCreateQmlType: an example that create qml type with C++ and use it in qml file. I create ButtonBase from C++ class QQuickItem, then write MyButton.qml based on ButtonBase class, finally use MyButton.qml in main.qml.
 <li>cursorStyle: an example that set cursor in Qt application.
 <li>qReadWriteLocker: an example that use QReadWriteLocker.
+<li>FatherWidget: an example that show child widget on father widget.
