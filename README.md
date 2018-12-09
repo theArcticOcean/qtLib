@@ -16,3 +16,4 @@ This folder stores some qt libraries and simple examples.
 <li>FatherWidget: an example that show child widget on father widget.
 <li>TextDialog: an example that use QDialogButtonBox and qRegisterMetaType
 <li>ProcessDialog: an example that use QProcess
+<li>FTPClient: dialog example that used QFtp
