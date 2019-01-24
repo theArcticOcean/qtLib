@@ -18,3 +18,4 @@ This folder stores some qt libraries and simple examples.
 <li>ProcessDialog: an example that use QProcess
 <li>FTPClient: dialog example that used QFtp
 <li>complex: child projects with qt.
+<li>StringTest: unit test example based on QT
