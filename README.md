@@ -21,3 +21,4 @@ This folder stores some qt libraries and simple examples.
 <li>StringTest: unit test example based on QT
 <li>PlusTest: unit test example based on QT
 <li>FatherWidget: child and father relation between two widgets
+<li> cmakeTest: use cmake to build qt5 project
