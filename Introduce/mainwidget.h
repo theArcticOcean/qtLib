@@ -29,7 +29,7 @@ public:
     void ClearMovies();
     void RefreshStackPageLayout();
     int GetAvaliableHeightInCenterPage();
-    void AdjustHeights(const int &height);
+    void AdjustHeights(const int &height);    
 private slots:
     void on_textEditClosed();
 
@@ -40,7 +40,8 @@ private slots:
     void on_AddEntryButton_clicked();
 
     void onSplitterMoved(int pos, int index);
-
+protected:
+    virtual void resizeEvent(QResizeEvent *event);
 private:
     Ui::MainWidget *ui;
     QApplication *m_ApplicationPtr;
@@ -51,6 +52,7 @@ private:
     QSplitter *m_Splitter;
     QString m_ApplicationDirPath;
     int m_StackPageIndex;
+    int m_LastPos;
 };
 
 #endif // MAINWIDGET_H

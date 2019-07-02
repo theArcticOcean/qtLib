@@ -10,13 +10,15 @@
 #include <QVBoxLayout>
 #include <QFileDialog>
 #include <QMainWindow>
+#include <QResizeEvent>
 
 MainWidget::MainWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainWidget),
     m_ApplicationPtr( nullptr ),
     m_TextBrowser( nullptr ),
-    m_Splitter( nullptr )
+    m_Splitter( nullptr ),
+    m_LastPos( -1 )
 {
     ui->setupUi(this);
     while( ui->stackedWidget->count() > 0 )
@@ -130,7 +132,7 @@ void MainWidget::on_textEditClosed()
     AdjustHeights( validHeight );
     if( !m_TextBrowser )
     {
-        m_TextBrowser = new QTextBrowser(this);
+        m_TextBrowser = new QTextBrowser(m_Splitter);
     }
     m_TextBrowser->setHtml( htmlContent );
     m_Splitter->addWidget( m_TextBrowser );
@@ -199,6 +201,7 @@ void MainWidget::on_AddImagesButton_clicked()
             label->setMaximumHeight( avaliableHeight );
             AdjustHeights( avaliableHeight );
             m_Labels.push_back( label );
+            m_Labels.last()->setParent( m_Splitter );
             m_Splitter->addWidget( m_Labels.last() );
 
             if( fileName.endsWith(".gif") || fileName.endsWith(".GIF") )
@@ -235,12 +238,46 @@ void MainWidget::on_AddEntryButton_clicked()
 void MainWidget::onSplitterMoved(int pos, int index)
 {
     qDebug( "onSplitterMoved pos: %d, index: %d", pos, index );
-    int elementCount = 0;
+    /*int elementCount = 0;
     if( m_TextBrowser )
     {
         elementCount++;
     }
     elementCount = elementCount + m_Labels.size();
-    int height = height * 1.0 / elementCount;
+    int height = ui->stackedWidget->currentWidget()->height() * 1.0 / elementCount; */
+    /* int offHeight = 0;
+    if( m_LastPos != -1 )
+    {
+        offHeight = pos - m_LastPos;
+    }
+    m_LastPos = pos;
+    QWidget *w1 = m_Splitter->widget( index - 1 );
+    QWidget *w2 = m_Splitter->widget( index );
+    w1->setMaximumHeight( w1->maximumHeight() - offHeight ); */
+    //w2->setMaximumHeight( w2->maximumHeight() + offHeight );
     //AdjustHeights( height );
+}
+
+void MainWidget::resizeEvent(QResizeEvent *event)
+{
+    qDebug( "resizeEvent" );
+    QWidget::resizeEvent( event );
+    if( m_Splitter )
+    {
+//        QSize sizeOff = event->size() - event->oldSize();
+//        m_Splitter->setSizeIncrement( sizeOff );
+        //m_Splitter->resize( event->size() );
+
+        if( m_TextBrowser )
+        {
+            //m_TextBrowser->resize( event->size() );
+            //m_TextBrowser->setSizeIncrement( sizeOff );
+            //m_TextBrowser->setMaximumSize( event->size() );
+        }
+        for( auto it: m_Labels )
+        {
+            //it->resize( event->size() );
+            //it->setMaximumSize( event->size() );
+        }
+    }
 }
