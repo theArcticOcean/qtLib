@@ -24,12 +24,10 @@ public:
     explicit MainWidget(QWidget *parent = nullptr);
     ~MainWidget();
     void FetchApplicationPtr( QApplication *app );
-    void CheckLayoutInWidget();
     void ClearLabels();
     void ClearMovies();
-    void RefreshStackPageLayout();
-    int GetAvaliableHeightInCenterPage();
-    void AdjustHeights(const int &height);    
+    void AdjustHeights(const int &height);
+    int GetAvaliableHeight();
 private slots:
     void on_textEditClosed();
 
@@ -38,8 +36,6 @@ private slots:
     void on_AddImagesButton_clicked();
 
     void on_AddEntryButton_clicked();
-
-    void onSplitterMoved(int pos, int index);
 protected:
     virtual void resizeEvent(QResizeEvent *event);
 private:
@@ -49,9 +45,7 @@ private:
     QTextBrowser *m_TextBrowser;
     QVector<QLabel*> m_Labels;  // current page images, includes static pic and gif
     QVector<QMovie*> m_Movies;  // current page gif players.
-    QSplitter *m_Splitter;
     QString m_ApplicationDirPath;
-    int m_StackPageIndex;
     int m_LastPos;
 };
 
