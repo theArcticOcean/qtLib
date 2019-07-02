@@ -9,9 +9,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     splitter = new QSplitter( this );
     //splitter->setSizePolicy( QSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum) );
-    m_Label = new QLabel( this );
-    m_Label1 = new QLabel( this );
-    m_Label2 = new QLabel( this );
+    m_Label = new QLabel( "hello", this );
+    m_Label->setStyleSheet( "background-color: red" );
+    m_Label1 = new QLabel( "hello", this );
+    m_Label1->setStyleSheet( "background-color: black" );
+    m_Label2 = new QLabel( "hello", this );
 
     splitter->addWidget(m_Label);
     splitter->addWidget(m_Label1);
@@ -22,9 +24,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     splitter->show();
     setCentralWidget( splitter );
+
+    connect( splitter, SIGNAL( splitterMoved(int, int) ), this, SLOT(onSplitterMoved(int, int)) );
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::onSplitterMoved(int pos, int index)
+{
+    qDebug( "pos: %d, index: %d", pos, index );
 }

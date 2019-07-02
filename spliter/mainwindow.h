@@ -18,7 +18,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+public slots:
+    void onSplitterMoved(int pos, int index);
 private:
     Ui::MainWindow *ui;
 
