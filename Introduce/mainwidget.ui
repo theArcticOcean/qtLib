@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>MainWidget</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,15">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -34,6 +34,24 @@
       <widget class="QPushButton" name="AddEntryButton">
        <property name="text">
         <string>Add New Entry</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="dirLabel">
+       <property name="text">
+        <string>savePath:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>the number of entries:</string>
        </property>
       </widget>
      </item>
