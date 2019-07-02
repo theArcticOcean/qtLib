@@ -222,12 +222,12 @@ void MainWidget::on_AddImagesButton_clicked()
 
 void MainWidget::on_AddEntryButton_clicked()
 {
-    QMainWindow *newWindow = new QMainWindow(this);
-    ui->stackedWidget->addWidget( newWindow );
-    m_Splitter = new QSplitter( newWindow );
+//    QMainWindow *newWindow = new QMainWindow( ui->stackedWidget );
+    m_Splitter = new QSplitter();
+    ui->stackedWidget->addWidget( m_Splitter );
     m_Splitter->setOrientation( Qt::Vertical );
     //m_Splitter->setOpaqueResize( false );
-    newWindow->setCentralWidget( m_Splitter );
+    //newWindow->setCentralWidget( m_Splitter );
 
     connect( m_Splitter, SIGNAL( splitterMoved(int, int) ), this, SLOT(onSplitterMoved(int, int)) );
 }
