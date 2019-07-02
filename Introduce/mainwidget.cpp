@@ -207,7 +207,7 @@ void MainWidget::on_AddImagesButton_clicked()
                 movie->start();
                 label->setMovie( movie );
                 m_Movies.push_back( movie );
-                //movie->setScaledSize( m_Labels.last()->size() );
+                movie->setScaledSize( m_Labels.last()->size() );
             }
             else
             {
