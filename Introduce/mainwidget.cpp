@@ -154,14 +154,14 @@ void MainWidget::on_AddImagesButton_clicked()
             if( fileName.endsWith(".gif") || fileName.endsWith(".GIF") )
             {
                 QMovie *movie = new QMovie( newfile );
+                movie->setScaledSize( QSize(width, height) );
                 movie->start();
                 label->setMovie( movie );
-                m_Movies.push_back( movie );
-                movie->setScaledSize( QSize(width, height) );
+                m_Movies.push_back( movie );                
             }
             else
             {
-                label->setPixmap( QPixmap( newfile ) );
+                //label->setPixmap( QPixmap( newfile ) );
 //                label->setMaximumWidth( ui->widget->width() );
 //                label->setMaximumHeight( label->size().height() );
                 label->setPixmap( QPixmap( newfile ).scaled( width, height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation ) );
