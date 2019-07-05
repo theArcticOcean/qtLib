@@ -134,12 +134,13 @@ TextEdit::TextEdit(QWidget *parent)
 
 void TextEdit::closeEvent(QCloseEvent *e)
 {
-    if (maybeSave())
-        e->accept();
-    else
-        e->ignore();
+//    if (maybeSave())
+//        e->accept();
+//    else
+//        e->ignore();
 
     emit closed();
+    e->accept();
 }
 
 void TextEdit::setupFileActions()

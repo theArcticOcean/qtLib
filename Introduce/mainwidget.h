@@ -50,6 +50,7 @@ private:
     QVector<QLabel*> m_Labels;  // current page images, includes static pic and gif
     QVector<QMovie*> m_Movies;  // current page gif players.
     QString m_ApplicationDirPath;
+    QString m_HtmlPath;
     int m_LastPos;
 };
 

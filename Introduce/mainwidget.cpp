@@ -11,6 +11,8 @@
 #include <QFileDialog>
 #include <QMainWindow>
 #include <QResizeEvent>
+#include <QStatusBar>
+#include <QTextDocumentWriter>
 
 MainWidget::MainWidget(QWidget *parent) :
     QWidget(parent),
@@ -102,7 +104,18 @@ void MainWidget::on_textEditClosed()
         qDebug( "[%s, %d]: page path is empty", __FUNCTION__, __LINE__ );
         return ;
     }
-    //CheckLayoutInWidget();
+
+    QTextDocumentWriter writer( m_HtmlPath );
+    bool success = writer.write( m_TextEdit->textEdit->document());
+    qDebug( "[%s, %d]: success: %d", __FUNCTION__, __LINE__, success );
+    if (success) {
+        m_TextEdit->textEdit->document()->setModified(false);
+        m_TextEdit->statusBar()->showMessage(tr("Wrote \"%1\"").arg(QDir::toNativeSeparators( m_HtmlPath )));
+    } else {
+        m_TextEdit->statusBar()->showMessage(tr("Could not write to file \"%1\"")
+                                 .arg(QDir::toNativeSeparators( m_HtmlPath )));
+    }
+
     QString htmlContent = m_TextEdit->textEdit->toHtml();
     if( !m_TextBrowser )
     {
@@ -219,4 +232,5 @@ void MainWidget::on_pageFolderButton_clicked()
     qDebug() << "on_pageFolderButton_clicked: " << fileList;
 
     ui->pathValueLabel->setText( fileList[0] );
+    m_HtmlPath = fileList[0] + "/introduce.html";
 }
