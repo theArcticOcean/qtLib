@@ -27,6 +27,7 @@ public:
     void ClearLabels();
     void ClearMovies();
     void AdjustHeights(const int &height);
+    bool CheckPagePathExist();
     int GetAvaliableHeight();
 private slots:
     void on_textEditClosed();
@@ -36,6 +37,9 @@ private slots:
     void on_AddImagesButton_clicked();
 
     void on_AddEntryButton_clicked();
+
+    void on_pageFolderButton_clicked();
+
 protected:
     virtual void resizeEvent(QResizeEvent *event);
 private:

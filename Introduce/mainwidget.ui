@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>MainWidget</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,15">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -38,14 +38,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="pageFolderButton">
        <property name="text">
         <string>Set Page Folder</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="newPageButton">
        <property name="text">
         <string>New Page</string>
        </property>
@@ -54,7 +54,7 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,6,1,1">
      <item>
       <widget class="QLabel" name="dirLabel">
        <property name="text">
@@ -63,9 +63,23 @@
       </widget>
      </item>
      <item>
+      <widget class="QLabel" name="pathValueLabel">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLabel" name="label">
        <property name="text">
         <string>the number of entries:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="numberValueLabel">
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </item>

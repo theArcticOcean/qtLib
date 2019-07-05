@@ -77,6 +77,12 @@ void MainWidget::AdjustHeights(const int &height)
     }
 }
 
+bool MainWidget::CheckPagePathExist()
+{
+    QString path = ui->pathValueLabel->text();
+    return QFile::exists( path );
+}
+
 int MainWidget::GetAvaliableHeight()
 {
     int height = ui->widget->height();
@@ -91,6 +97,11 @@ int MainWidget::GetAvaliableHeight()
 
 void MainWidget::on_textEditClosed()
 {
+    if( !CheckPagePathExist() )
+    {
+        qDebug( "[%s, %d]: page path is empty", __FUNCTION__, __LINE__ );
+        return ;
+    }
     //CheckLayoutInWidget();
     QString htmlContent = m_TextEdit->textEdit->toHtml();
     if( !m_TextBrowser )
@@ -115,7 +126,11 @@ void MainWidget::on_AddTextButton_clicked()
 
 void MainWidget::on_AddImagesButton_clicked()
 {
-    //CheckLayoutInWidget();
+    if( !CheckPagePathExist() )
+    {
+        qDebug( "[%s, %d]: page path is empty", __FUNCTION__, __LINE__ );
+        return ;
+    }
 //    m_VerticalLayout = dynamic_cast<QVBoxLayout *>( ui->stackedWidget->currentWidget()->layout() );
 //    qDebug( "layout: %p\n", m_VerticalLayout );
     qDebug() << "m_ApplicationDirPath: " << m_ApplicationDirPath;  // exe file path
@@ -173,11 +188,35 @@ void MainWidget::on_AddImagesButton_clicked()
 
 void MainWidget::on_AddEntryButton_clicked()
 {
-
+    QMap<int, QString> filesMap;
+    int countOfWidgets = ui->verticalLayout->count();
+    for( int i = 0; i < countOfWidgets; ++i )
+    {
+        QLayoutItem *item = ui->verticalLayout->takeAt( i );
+        if( (void *)item == (void *)m_TextBrowser )
+        {
+//            filesMap[i] = m_TextBrowser
+        }
+    }
 }
 
 void MainWidget::resizeEvent(QResizeEvent *event)
 {
     qDebug( "resizeEvent" );
     QWidget::resizeEvent( event );
+}
+void MainWidget::on_pageFolderButton_clicked()
+{
+    QFileDialog dialog(this);
+    dialog.setWindowTitle( tr("Choose Page Directory") );
+    dialog.setFileMode( QFileDialog::DirectoryOnly );
+    dialog.setViewMode( QFileDialog::Detail );
+    QStringList fileList;
+    if( QDialog::Accepted == dialog.exec() )
+    {
+        fileList = dialog.selectedFiles();
+    }
+    qDebug() << "on_pageFolderButton_clicked: " << fileList;
+
+    ui->pathValueLabel->setText( fileList[0] );
 }
