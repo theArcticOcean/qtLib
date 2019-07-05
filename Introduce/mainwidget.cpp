@@ -169,31 +169,34 @@ void MainWidget::on_AddImagesButton_clicked()
         for( auto it: fileList )
         {
             const QString fileName = it.split("/").last();
-            QString newfile = m_ApplicationDirPath + "/" + fileName;
-            QFile::copy( it, newfile );
-            int height = GetAvaliableHeight();
-            int width = ui->widget->width();
-            AdjustHeights( height );
-            QLabel *label = new QLabel( ui->widget );
-            m_Labels.push_back( label );
-            m_Labels.last()->setParent( ui->widget );
-            ui->verticalLayout_2->addWidget( m_Labels.last(), 1 ); //Qt::AlignVertical_Mask
+            QString newfile = ui->pathValueLabel->text() + "/" + fileName;
+            if( QFile::copy( it, newfile ) )
+            {
+                int height = GetAvaliableHeight();
+                int width = ui->widget->width();
+                AdjustHeights( height );
+                QLabel *label = new QLabel( ui->widget );
+                m_Labels.push_back( label );
+                m_Labels.last()->setParent( ui->widget );
+                ui->verticalLayout_2->addWidget( m_Labels.last(), 1 ); //Qt::AlignVertical_Mask
 
-            if( fileName.endsWith(".gif") || fileName.endsWith(".GIF") )
-            {
-                QMovie *movie = new QMovie( newfile );
-                movie->setScaledSize( QSize(width, height) );
-                movie->start();
-                label->setMovie( movie );
-                m_Movies.push_back( movie );                
-            }
-            else
-            {
-                //label->setPixmap( QPixmap( newfile ) );
-//                label->setMaximumWidth( ui->widget->width() );
-//                label->setMaximumHeight( label->size().height() );
-                label->setPixmap( QPixmap( newfile ).scaled( width, height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation ) );
-                label->setScaledContents( true );
+                if( fileName.endsWith(".gif") || fileName.endsWith(".GIF") )
+                {
+                    QMovie *movie = new QMovie( newfile );
+                    movie->setScaledSize( QSize(width, height) );
+                    movie->start();
+                    label->setMovie( movie );
+                    m_Movies.push_back( movie );
+                }
+                else
+                {
+                    //label->setPixmap( QPixmap( newfile ) );
+    //                label->setMaximumWidth( ui->widget->width() );
+    //                label->setMaximumHeight( label->size().height() );
+                    label->setPixmap( QPixmap( newfile ).scaled( width, height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation ) );
+                    label->setScaledContents( true );
+                }
+                m_ImagesPath.push_back( newfile );
             }
         }
     }
@@ -203,14 +206,19 @@ void MainWidget::on_AddEntryButton_clicked()
 {
     QMap<int, QString> filesMap;
     int countOfWidgets = ui->verticalLayout->count();
+    int index = 0;
     for( int i = 0; i < countOfWidgets; ++i )
     {
         QLayoutItem *item = ui->verticalLayout->takeAt( i );
         if( (void *)item == (void *)m_TextBrowser )
         {
-//            filesMap[i] = m_TextBrowser
+            filesMap[i] = m_HtmlPath;
+        }
+        else {
+            filesMap[i] = m_ImagesPath[ index++ ];
         }
     }
+    // to do: write json file.
 }
 
 void MainWidget::resizeEvent(QResizeEvent *event)

@@ -51,6 +51,7 @@ private:
     QVector<QMovie*> m_Movies;  // current page gif players.
     QString m_ApplicationDirPath;
     QString m_HtmlPath;
+    QStringList m_ImagesPath;
     int m_LastPos;
 };
 
